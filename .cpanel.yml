@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/frontier/vehicle
+    - /bin/cp -r * $DEPLOYPATH
