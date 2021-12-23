@@ -28,6 +28,7 @@ $(document).ready(function (e) {
     $("#dest").keyup(function(){
         var k = $(this).val();
         var s = jQuery('#source').val();
+        //alert(s);
         $.ajax({
         type: "GET",
         url: 'warehouse/suggested-desti',
@@ -59,8 +60,6 @@ $(document).ready(function (e) {
             url: 'vehicle/check-vehicles',
             data:{ 
                 vehicle: vehicle, 
-                source: source,
-                destination: destination,  
               },
             beforeSend: function(){
                 $("#dest").css("background","#FFF");
@@ -84,31 +83,19 @@ $(document).ready(function (e) {
       //alert('hii');return false;
     e.preventDefault();
     var formData = new FormData(this);
-    var dest = jQuery('#dest').val();
-    var vehicle = jQuery('#vlist').val();
-    var vt = jQuery('#vtype').val();
+    var dest = jQuery('#destination').val();
+    var trnl = jQuery('#trnl').val();
     var tl = parseInt(jQuery('#trnl').val());
-    var arr = vt.split(' ');
-    var cap = parseInt(arr[0]);
 
-
-    /*var lane = jQuery('#lanes').val();
-    if (!lane) {
-      swal("Error!", "Lane is required, choose the right destination", "error");
-      return false;
-    }*/
     if (!dest) {
       swal("Error!", "Destination is required", "error");
       return false;
     }
-    if (!vehicle) {
-        swal("Error!", "Vehicle no is required", "error");
+    if (!trnl) {
+        swal("Error!", "Transit load is required", "error");
         return false;
       }
-   if (tl > cap) {
-        swal("Error!", "Transit Load can not be greater then Vehicle type/capacity", "error");
-        return false;
-      }
+
     $.ajax({
         type:'POST',
         url: "transaction/add-new-transaction",
@@ -169,4 +156,14 @@ $(document).ready(function (e) {
         
    }
  ////////// Function used in Ajax Calls ///////////////////
+
+ $("#addtrnp").click(function(){
+  $(".trpfields").show();
+  $(".inv_fields").hide();
+});
+
+$("#invc").click(function(){
+  $(".inv_fields").show();
+  $(".trpfields").hide();
+});
 

@@ -139,11 +139,11 @@ $(document).ready(function (e) {
     $('#add_lane').submit(function(e) {
       e.preventDefault();
       var formData = new FormData(this);
-      var from = jQuery('#from').val();
-      var destination = jQuery('#destination').val();
+      var from = jQuery('#from_places').val();
+      var destination = jQuery('#to_places').val();
      // alert(vtype);return false;
       if (!from) {
-        swal("Error!", "From field is required", "error");
+        swal("Error!", "Origin field is required", "error");
         return false;
       }
       if (!destination) {

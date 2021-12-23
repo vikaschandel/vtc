@@ -94,8 +94,9 @@
                                     </div>
                                     <div class="form-group" id="warehouseList">
                                         <label for="warehouse">{{ __('Assign Warehouse')}}<span class="text-red">*</span></label>
-                                        {!! Form::select('wid', $warehouses, null,[ 'class'=>'form-select', 'placeholder' => 'Select Warehouse','id'=> 'wid']) !!}
+                                        {!! Form::select('wid', $warehouses, null,[ 'class'=>'form-select select2','id'=> 'wid', 'name'=> 'wid[]', 'multiple'=> 'multiple']) !!}
                                     </div>
+                                    
                                 </div>
                                 
                                 <div class="col-md-12">

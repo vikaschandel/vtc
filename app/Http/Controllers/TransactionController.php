@@ -42,8 +42,9 @@ class TransactionController extends Controller
             return redirect('404');   
         }
         elseif($user == 1){
-            $wname = DB::table('warehouses')->select('wid')->get();
-            $assigned_ware = '';
+            $wname = DB::table('warehouses')->select('wid', 'city')->get();
+            $assigned =  $wname->toArray();
+            $ass_w = json_decode(json_encode($assigned), true);
             $vehicle = DB::table('vehicles')->distinct()->get();
             $v= $vehicle->toArray();
             $trans = DB::table('taggings')->select('transporters')->get();
@@ -51,19 +52,22 @@ class TransactionController extends Controller
             $uns = unserialize($t[0]->transporters);
             //echo "<pre>"; print_r($uns);die;
             //Currently working for 1 warehouse
-            return view('create-transaction',  ['vehicle' => $v, 'transporter' => $uns, 'assigned' => $assigned_ware]); 
+            return view('create-transaction',  ['vehicle' => $v, 'transporter' => $uns, 'assigned' => $ass_w]); 
         }
         else{
         $wid = $uw[0]->wid;
-        $wname = DB::table('warehouses')->select('wid')->where('id', $wid)->get();
-        $assigned_ware = $wname[0]->wid;
+        $ids = str_split(str_replace(',', '', $wid));
+        $wname = DB::table('warehouses')->select('wid', 'city')->whereIn('id', $ids)->get();
+        $assigned =  $wname->toArray();
+        $ass_w = json_decode(json_encode($assigned), true);
         $vehicle = DB::table('vehicles')->distinct()->get();
         $v= $vehicle->toArray();
-        $trans = DB::table('taggings')->select('transporters')->where('wid', $assigned_ware)->get();
+        $trans = DB::table('taggings')->select('transporters')->whereIn('wid', $ass_w)->get();
         $t= $trans->toArray();
+        //echo "<pre>"; print_r($t);die;
         if(!empty($t)){
             $uns = unserialize($t[0]->transporters);
-            return view('create-transaction',  ['vehicle' => $v, 'transporter' => $uns, 'assigned' => $assigned_ware]);   
+            return view('create-transaction',  ['vehicle' => $v, 'transporter' => $uns, 'assigned' => $ass_w]);   
         }
         else{
             return view('create-transaction',  ['vehicle' => $v]); 
@@ -145,78 +149,13 @@ class TransactionController extends Controller
     public function check_vehicles() 
     {
         $veh = vehicle::select('type')->where('vehicle_no', 'like', $_GET["vehicle"].'%')->get();
-        $scity = Warehouse::select('city')->where('wid', $_GET['source'])->get();
-        $dcity = Warehouse::select('city')->where('wid', $_GET['destination'])->get();
-        $source = $scity->toArray();
-        $destination = $dcity->toArray();
-        $lne = lane::select('vehicle_type', 'id')->where('from', $source[0]['city'])->where('destination', $destination[0]['city'])->get();
         $vtype = $veh->toArray();
-        $vc = $vtype[0]['type'];
-        $lanev = $lne->toArray();
-        $lid = '';
-        foreach($lanev as $lane){
-           $l = $lane['vehicle_type'];
-           $vt = $vtype[0]['type'];
-           $exp = explode('-', $l);
-           $min = $exp[0];
-           $max = $exp[1]; 
-           if($min <= $vt && $vt <= $max ){
-              $lid .= $lane['id'];
-           }
-        }
         $vehicle_type = $vtype[0]['type'];
         $response['vt'] = $vehicle_type;
-        $response['lane'] = $lid;
         return Response::json($response);
         
     }
 
-    /*********************** Create New Transaction *************************/
-
-    public function add_new_transaction()
-    {
-        try
-        {
-            $chk = Transaction::where('lr', $_POST["lr"])->get();
-            $co = count($chk);
-            if($co>0){
-                $response['message'] = "Transaction for this LR is already created";
-                return Response::json($response);
-          }
-          else{
-            $transaction = Transaction::create([
-                'source' => $_POST['source'],
-                'destination' => $_POST['dest'],
-                'lane' => $_POST['lanes'],
-                'vehicle_no' => $_POST['vlist'],
-                'vtype' => $_POST['vtype'],
-                'transit_load' => $_POST['trnl'],
-                'transporter' => $_POST['trp'],
-                'seal' => $_POST['seal'],
-                'driver' => $_POST['driver'],
-                'lr' => $_POST['lr'],
-                'product' => $_POST['pname'],
-                'invoice' => $_POST['invoice'],
-                'idate' => $_POST['idate'],
-                'status' => '1',
-            ]);
-            $transaction->save();
-            $lid = $transaction->id;
-            $prefix = "TRN-000";
-            $transaction_id = $prefix.''.$lid;
-            $tid = Transaction::where('id', $lid)->update(['tid' => $transaction_id]);
-
-            $response['success'] = true;
-            return Response::json($response);
-          }
-
-        }catch (\Exception $e) {
-            $bug = $e->getMessage();
-            $response['message'] = $bug;
-            return Response::json($response);
-
-        }
-    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////// Function required to create a transaction (Warehouse, vehicles, lanes, transporters,) ////////////
@@ -567,19 +506,42 @@ class TransactionController extends Controller
     {
         try
         {
-           // echo "<pre>"; print_r($_POST);die;
-           $leadtime = $_POST['leadtime'].' '.$_POST['lformat'];
+            $cap_arr = implode(',' ,$_POST['vtype']);
+            $o= $_POST['origin'];
+            $or= explode(',', $o);
+            $origin = $or[0];
+            $d = $_POST['destination'];
+            $de= explode(',', $d);
+            $destination = $de[0];
+            $vt = $_POST['vtype'];
+            $c = 0;
+            $earr = array();
+            foreach($vt as $l){
+            $qry = lane::whereIn('from', [$origin, $destination])->whereIn('destination', [$origin, $destination])->whereRaw('FIND_IN_SET(?, vehicle_type)', [$l])->get();
+            $co = count($qry);
+            if($co > 0){
+                $c++; 
+                $earr[] = $l; 
+            }
+            }
+           
+            if(!empty($earr)){
+                $response['success'] = false;
+                $response['messages'] = 'Lane already exists';
+                return Response::json($response);
+            }
+            else{
             $lane = lane::create([
-                'from' => $_POST['from'],
-                'destination' => $_POST['destination'],
-                'vehicle_type' => $_POST['vtype'],
-                'lead_time' => $leadtime,
+                'from' => $origin,
+                'destination' => $destination,
+                'vehicle_type' => $cap_arr,
+                'lead_time' => $_POST['leadtime'],
             ]);
 
             $lane->save();
             $response['success'] = true;
             return Response::json($response);
-
+           }
         }catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);

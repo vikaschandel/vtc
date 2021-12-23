@@ -1,8 +1,24 @@
 @extends("layouts.app")
-
 @section("style")
+<style>
+td.dt-control {
+    background: url('/img/details_open.png') no-repeat center center !important;
+    cursor: pointer;
+}
+tr.shown td.dt-control {
+    background: url('/img/details_close.png') no-repeat center center !important;
+}
+.theads {
+    text-align: center;
+    padding: 5px 0;
+    color: #279dff;
+}
+
+</style>
 <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBQ6x_bU2BIZPPsjS8Y8Zs-yM2g2Bs2mnM" type="text/javascript"></script>
+
 @endsection
 
     @section("wrapper")
@@ -27,58 +43,19 @@
             <!-- start message area-->
             @include('include.message')
             <!-- end message area-->
+            <?php $title = array("","Vehicle No", "Route", "Started", "ETA", "Status");?>
             <div class="card">
                 <div class="card-body">
-                <div class="d-lg-flex align-items-center mb-4 gap-3">
-							<div class="position-relative">
-								<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-							</div>
-						  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Create New Transaction</a></div>
-						</div>
                 <div class="table-responsive">
-							<table class="table mb-0">
-								<thead class="table-light">
-									<tr>
-										<th>TRNS#</th>
-										<th>Vehicle</th>
-										<th>Destination</th>
-										<th>Status</th>
-										<th>Date</th>
-										<th>View Details</th>
-										<th>Actions</th>
-									</tr>
+							<table class="table mb-0 display" id="dept">
+                                <h2 class="theads">Departure </h2>
+								<thead class="table-dark">
+                                <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
 								</thead>
 								<tbody>
-									<?php
-									echo "<pre>";print_r($data);die;
-									?>
-									 @foreach ($data as $transactions)
-									<tr>
-										<td>
-											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
-												<div class="ms-2">
-													<h6 class="mb-0 font-14">{{ $transactions['tid'] }}</h6>
-												</div>
-											</div>
-										</td>
-										<td>{{ $transactions['vehicle_no'] }}</td>
-										<td>{{ $transactions['destination'] }}</td>
-										<td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>{{ $transactions['tid'] }}</div></td>
-										<td>{{ $transactions['created_at'] }}</td>
-										<td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View Details</button></td>
-										<td>
-											<div class="d-flex order-actions">
-												<a href="javascript:;" class=""><i class='bx bxs-edit'></i></a>
-												<a href="javascript:;" class="ms-3"><i class='bx bxs-trash'></i></a>
-											</div>
-										</td>
-									</tr>
-									@endforeach
 								</tbody>
 							</table>
+                           
 						</div>
                 </div>
             </div>
@@ -90,6 +67,82 @@
 @section("script")
 <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
 <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
+<script>
+/* Formatting function for row details - modify as you need */
+ 
+function format ( d ) {
+
+    // `d` is the original data object for the row
+    return '<div class="row">'+
+    '<div class="col-md-4">'+
+    'jiiii'+
+    '</div>'+
+    '<div class="col-md-8">'+
+    '<div id="map-'+d.id+'" style="height: 50vh; width: 100%" ></div>'+
+    '<script type="text/javascript">\n' + 
+                    "var map = new google.maps.Map(document.getElementById('map-"+d.id+"'), {zoom: 8, center: 'Delhi',});\n"+
+                    "var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': false});\n"+
+                    "var directionsService = new google.maps.DirectionsService();\n"+
+                    "var travel_mode = 'DRIVING';\n"+ 
+                    "var origin = '"+d.from+"';\n"+
+                    "var destination = '"+d.city+"';\n"+
+                    "directionsService.route({\n"+
+                                "origin: origin,\n"+
+                                "destination: destination,\n"+
+                                "travelMode: travel_mode,\n"+
+                                "avoidTolls: true\n"+
+                            "}, function (response, status) {\n"+
+                                "if (status === 'OK') {\n"+
+                                    "directionsDisplay.setMap(map);\n"+
+                                    "directionsDisplay.setDirections(response);\n"+
+                                "} else {\n"+
+                                    "directionsDisplay.setMap(null);\n"+
+                                    "directionsDisplay.setDirections(null);\n"+
+                                    "alert('Unknown lane found with error code 0, contact your manager');\n"+
+                                "}\n"+
+                    "});\n"+
+             '<\/script></div>'+
+    '</div>';
+}
+
+$(document).ready(function() {
+    var table = $('#dept').DataTable( {
+        "ajax": "/transactions/outgoing-dt",
+        "columns": [
+            {
+                "className": 'dt-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": ''
+            },
+            { "data": 'vehicle_no' },
+            { "data": "from" },
+            { "data": "start_date" },
+            { "data": "transit_load" },
+            { "data": "lane" },
+        ],
+        "order": [[1, 'asc']]
+    } );
+     
+    // Add event listener for opening and closing details
+    $('#dept tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
+
+</script>
 <!--server side users table script-->
 
 @endsection

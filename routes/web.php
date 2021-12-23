@@ -160,28 +160,11 @@ Route::get('/warehouse/suggested-lanes', [TransactionController::class,'suggeste
 Route::get('/warehouse/suggested-desti', [TransactionController::class,'suggested_desti']);
 Route::get('/warehouse/getLanes', [TransactionController::class,'getLanes']);
 Route::get('/vehicle/check-vehicles', [TransactionController::class,'check_vehicles']);
-Route::post('/transaction/add-new-transaction', [TransactionController::class,'add_new_transaction']);
 
 /******************************* Transactions Data Routes ******************************/
-
+Route::post('/transaction/add-new-transaction', [TransactionData::class,'add_new_transaction']);
 Route::get('/transactions/outgoing', [TransactionData::class,'outgoing_transactions']);
+Route::get('/transactions/outgoing-dt', [TransactionData::class,'outgoing_dt']);
 Route::get('/transactions/incoming', [TransactionData::class,'incoming_transactions']);
-
-Route::get('/test', function(){
-	$config= array();
-    $config['center'] = 'Ludhiana, Punjab';
-	$config['zoom'] = '11';
-	$config['hight'] = '800';
-	$config['directions'] = true;
-	$config['directionsStart'] = 'Ludhiana, Punjab';
-	$config['directionsEnd'] = 'Gaziabad, Uttar Pradesh';
-	$config['directionsDivID'] = 'directionDiv';
-    Map::initialize($config);
-
-    // set up the marker ready for positioning
-    // once we know the users location
-
-    $map = Map::create_map();
-    
-	return view('transactions')->with('map', $map);
-});
+Route::post('/warehouses/get-assigned', [TransactionData::class,'get_assigned']);
+Route::post('/warehouses/get-destination', [TransactionData::class,'get_destination']);

@@ -106,6 +106,9 @@ class UserController extends Controller
         try
         {
             // store user information
+            $ware = $request->wid;
+            $wlist = implode(',', $ware);
+            //echo "<pre>";print_r($wlist);die;
             $user = User::create([
                         'name'     => $request->name,
                         'email'    => $request->email,
@@ -116,11 +119,10 @@ class UserController extends Controller
             $user->syncRoles($request->role);
 
             if($user){ 
-                $ware = $request->wid;
-                if(!empty($ware)){
+                if(!empty($wlist)){
                 $uid = $user->id;
                 $udata = DB::table('warehouse_has_users')->insert([
-                    'wid'     => $request->wid,
+                    'wid'     => $wlist,
                     'uid'    => $uid,
                 ]);
                }

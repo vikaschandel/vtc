@@ -27,14 +27,19 @@
     <link rel="stylesheet" href="{{ url('assets/css/header-colors.css') }}" />
     <title>VTC</title>
     <style>
-    #google_translate_element{width:300px;float:right;text-align:right;display:block}
-    .goog-te-banner-frame.skiptranslate { display: none !important;} 
-    body { top: 0px !important; }
-    #goog-gt-tt{display: none !important; top: 0px !important; } 
-    .goog-tooltip skiptranslate{display: none !important; top: 0px !important; } 
-    .activity-root { display: hide !important;} 
-    .status-message { display: hide !important;}
-    .started-activity-container { display: hide !important;}        
+        #google_translate_element{width:300px;float:right;text-align:right;display:block}
+        .goog-te-banner-frame.skiptranslate { display: none !important;} 
+        body { top: 0px !important; }
+        #goog-gt-tt{display: none !important; top: 0px !important; } 
+        .goog-tooltip skiptranslate{display: none !important; top: 0px !important; } 
+        .activity-root { display: hide !important;} 
+        .status-message { display: hide !important;}
+        .started-activity-container { display: hide !important;}  
+        .goog-te-gadget-simple {
+        border: 1px solid #ccc !important;
+        padding: 5px !important;
+        border-radius: 10px !important;
+    }     
     </style>    
 </head>
 
@@ -159,7 +164,7 @@
 	<!-- Bootstrap JS -->
     <script type="text/javascript">
     function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en',includedLanguages: 'hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    new google.translate.TranslateElement({pageLanguage: 'en',includedLanguages: 'hi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
    </script>
 
