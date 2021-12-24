@@ -38,7 +38,7 @@ class TransactionData extends Controller
         return view('outgoing-transactions');
     }
 
-    public function outgoing_dt() 
+    public function outgoing_dt(Request $request) 
     {
         $user = Auth::user()->id; // Get Current User
         $uw = DB::table('warehouse_has_users')->select('wid')->where('uid', $user)->get();
@@ -57,6 +57,9 @@ class TransactionData extends Controller
         $userTrans = call_user_func_array('array_merge', $trns);
         $array_out = array();
         foreach($userTrans as $key => $txn){
+        $qry_sware = Warehouse::select('warehouse', 'city', 'state')->where('id',$txn['source'])->get();
+        $qry_dware = Warehouse::select('warehouse', 'city', 'state')->where('id',$txn['destination'])->get();      
+       // echo "<pre>"; print_r($qry_sware[0]->warehouse);die;
         $qry = lane::select('from','destination as city','lead_time')->where('id',$txn['lane'])->get();
         $res= $qry->toArray();
         $cr = $txn['created_at'];
@@ -69,11 +72,44 @@ class TransactionData extends Controller
         }
         
         $res[$key]['start_date'] = date("d-m-Y", strtotime($date[0])); 
+        $res[$key]['source'] = $qry_sware[0]->warehouse;
+        $res[$key]['destination'] = $qry_dware[0]->warehouse;
+        $res[$key]['route_source'] = $qry_sware[0]->city.', '.$qry_sware[0]->state;
+        $res[$key]['route_destination'] = $qry_dware[0]->city.', '.$qry_dware[0]->state;
         $rs = call_user_func_array('array_merge', $res);
         $array_out[]= array_merge($txn, $rs);
         }
-       //echo "<pre>";print_r($array_out);
-        return Response::json(['data' => $array_out]);
+      // echo "<pre>";print_r($array_out);die;
+       $data = $array_out;
+       return Datatables::of($data)
+        ->addColumn('route', function($data){
+           //echo "<pre>";print_r($data);die;
+           $troute = '<ul class="ant-timeline">
+           <li class="ant-timeline-item  css-b03s4t">
+               <div class="ant-timeline-item-tail"></div>
+               <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
+               <div class="ant-timeline-item-content">
+                <div class="css-16pld72">'.$data['route_source'].', India</div>
+              </div>
+           </li>
+           <li class="ant-timeline-item ant-timeline-item-last css-phvyqn">
+               <div class="ant-timeline-item-tail"></div>
+               <div class="ant-timeline-item-head ant-timeline-item-head-red"></div>
+               <div class="ant-timeline-item-content">
+               <div class="css-16pld72">'.$data['route_destination'].', India</div>
+               <div class="css-16pld72" style="font-size: 12px; color: rgb(102, 102, 102);">     
+                 <span>'.$data['destination'].', </span>
+                 <span>'.$data['city'].'</span>
+               </div>
+             </div>
+           </li>
+         </ul>';
+            return $troute;
+        })
+        ->rawColumns(['route'])
+        ->make(true);
+
+        //return Response::json(['data' => $array_out]);
     }
        
         

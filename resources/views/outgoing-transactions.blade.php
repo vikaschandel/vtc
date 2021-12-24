@@ -13,7 +13,73 @@ tr.shown td.dt-control {
     padding: 5px 0;
     color: #279dff;
 }
+.ant-timeline {
+    box-sizing: border-box;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    font-feature-settings: "tnum","tnum";
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.css-b03s4t {
+    color: rgb(0, 0, 0);
+    padding: 6px 0px 2px;
+}
+.css-16pld72 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+.ant-timeline-item-tail {
+    position: absolute;
+    top: 10px;
+    left: 4px;
+    height: calc(100% - 10px);
+    border-left: 2px solid #e8e8e8;
+}
+.ant-timeline-item-last>.ant-timeline-item-tail {
+    display: none;
+}
 
+.ant-timeline-item-head-red {
+    background-color: #f5222d;
+    border-color: #f5222d;
+}
+.ant-timeline-item-head-green {
+    background-color: #52c41a;
+    border-color: #52c41a;
+}
+.ant-timeline-item-content {
+    position: relative;
+    top: -6px;
+    margin: 0 0 0 18px;
+    word-break: break-word;
+}
+.css-phvyqn {
+    color: rgb(0, 0, 0);
+    padding: 0px;
+    height: 34px !important;
+}
+.ant-timeline-item {
+    position: relative;
+    margin: 0;
+    padding: 0 0 5px;
+    font-size: 14px;
+    list-style: none;
+}
+.ant-timeline-item-head {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+}
+.css-ccw3oz .ant-timeline-item-head {
+    padding: 0px;
+    border-radius: 0px !important;
+}
 </style>
 <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -115,8 +181,8 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": 'vehicle_no' },
-            { "data": "from" },
+            { "data": 'vehicle_no'},
+            { "data": "route" },
             { "data": "start_date" },
             { "data": "transit_load" },
             { "data": "lane" },
