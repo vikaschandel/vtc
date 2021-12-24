@@ -145,7 +145,7 @@ class TransactionData extends Controller
                 $warr = explode(',', $ass);
                 $trns = array();
                 foreach($warr as $w){
-                    $tqry = Transaction::where('source', $w)->get();
+                    $tqry = Transaction::where('destination', $w)->get();
                     $res = count($tqry);
                     if($res > 0){
                         $trns[]= $tqry->toArray();
