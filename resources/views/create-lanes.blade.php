@@ -259,3 +259,5 @@ $(document).ready(function () {
     <!--get role wise permissiom ajax script-->
     <script src="{{ asset('js/get-role.js') }}"></script>
 	@endsection
+
+    

@@ -45,7 +45,11 @@
 
 <body>
 	<!--wrapper-->
-	<div class="wrapper">
+    @role('Security Guards') 
+	<div class="wrapper toggled">
+    @else
+    <div class="wrapper">
+    @endrole     
 		<!--start header -->
 		@include("layouts.header")
 		<!--end header -->

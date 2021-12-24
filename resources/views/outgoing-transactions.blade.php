@@ -114,7 +114,6 @@ tr.shown td.dt-control {
                 <div class="card-body">
                 <div class="table-responsive">
 							<table class="table mb-0 display" id="dept">
-                                <h2 class="theads">Departure </h2>
 								<thead class="table-dark">
                                 <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
 								</thead>
@@ -181,7 +180,7 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": 'vehicle_no'},
+            { "data": 'transporters'},
             { "data": "route" },
             { "data": "start_date" },
             { "data": "transit_load" },

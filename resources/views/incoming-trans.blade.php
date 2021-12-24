@@ -41,37 +41,15 @@
             <!-- end message area-->
             <div class="card">
                 <div class="card-body">
+                <?php $title = array("","Vehicle No", "Status", "Action");?>
                 <div class="table-responsive">
-							<table class="table mb-0">
+							<table class="table mb-0" id="arrivals">
                                 <h2 class="theads">ARRIVALS </h2>
 								<thead class="table-light">
-									<tr>
-										<th>TRNS#</th>
-										<th>Arriving From</th>
-										<th>Dpt. Date</th>
-										<th>Vehicle</th>
-										<th>Transit Load</th>
-										<th>Transporter</th>
-										<th>Tracking Status</th>
-										<th>Lead Time Status</th>
-									</tr>
+                                <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
 								</thead>
 								<tbody>
-									<?php
-									//echo "<pre>";print_r($data);die;
-									?>
-									 @foreach ($data as $transactions)
-									<tr>
-										<td>{{ $transactions['tid'] }}</td>
-										<td>{{ @$transactions['from'] }}</td>
-										<td>{{ $transactions['created_at'] }}</td>
-										<td>{{ $transactions['vehicle_no'] }}</td>
-										<td>{{ $transactions['transit_load'] }}MT</td>
-										<td>{{ $transactions['transporter'] }}</td>
-										<td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>{{ $transactions['status'] }}</div></td>
-										<td><div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>On time</div></td>
-									</tr>
-									@endforeach
+
 								</tbody>
 							</table>
 						</div>

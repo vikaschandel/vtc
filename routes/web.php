@@ -165,6 +165,9 @@ Route::get('/vehicle/check-vehicles', [TransactionController::class,'check_vehic
 Route::post('/transaction/add-new-transaction', [TransactionData::class,'add_new_transaction']);
 Route::get('/transactions/outgoing', [TransactionData::class,'outgoing_transactions']);
 Route::get('/transactions/outgoing-dt', [TransactionData::class,'outgoing_dt']);
-Route::get('/transactions/incoming', [TransactionData::class,'incoming_transactions']);
+Route::get('/transactions/incoming', function () {
+    return view('incoming-trans');
+});
+Route::get('/transactions/incoming-trn-dt', [TransactionData::class,'incoming_trans_dt']);
 Route::post('/warehouses/get-assigned', [TransactionData::class,'get_assigned']);
 Route::post('/warehouses/get-destination', [TransactionData::class,'get_destination']);

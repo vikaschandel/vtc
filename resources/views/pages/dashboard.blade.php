@@ -1,11 +1,50 @@
 @extends("layouts.app")
 @section("style")
     <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 @endsection
 
 @section("wrapper")
     <div class="page-wrapper">
         <div class="page-content">
+           @role('Security Guards') 
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h6 class="mb-0">Recent Orders</h6>
+                        </div>
+                        <div class="dropdown ms-auto">
+                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:;">Action</a>
+                                </li>
+                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                <?php $title = array("","Vehicle No", "Status", "Action");?>
+                <div class="table-responsive">
+							<table class="table mb-0" id="arrivals">
+                                <h2 class="theads">ARRIVALS </h2>
+								<thead class="table-light">
+                                <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+                </div>
+            </div>
+            @else
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 <div class="col">
                     <div class="card radius-10 border-start border-0 border-3 border-info">
@@ -153,117 +192,7 @@
 
                 </div>
             </div><!--end row-->
-
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <h6 class="mb-0">Recent Orders</h6>
-                        </div>
-                        <div class="dropdown ms-auto">
-                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-middle mb-0">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Product</th>
-                                <th>Photo</th>
-                                <th>Product ID</th>
-                                <th>Status</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Shipping</th>
-                            </tr>
-                            </thead>
-                            <tbody><tr>
-                                <td>FURASTAR</td>
-                                <td></td>
-                                <td>#9405822</td>
-                                <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                                <td>₹1250.00</td>
-                                <td>03 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>FERTERRA</td>
-                                <td></td>
-                                <td>#8304620</td>
-                                <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                                <td>₹1500.00</td>
-                                <td>05 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>CORAGEN</td>
-                                <td></td>
-                                <td>#4736890</td>
-                                <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                                <td>₹1400.00</td>
-                                <td>06 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 70%"></div>
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>MARSHAL</td>
-                                <td></td>
-                                <td>#8543765</td>
-                                <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                                <td>₹1200.00</td>
-                                <td>14 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                                    </div></td>
-                            </tr>
-                            <tr>
-                                <td>DURMET</td>
-                                <td></td>
-                                <td>#9629240</td>
-                                <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                                <td>₹1500.00</td>
-                                <td>18 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                                    </div></td>
-                            </tr>
-                            <tr>
-                                <td>GEZEKO</td>
-                                <td></td>
-                                <td>#8506790</td>
-                                <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                                <td>₹1800.00</td>
-                                <td>21 Feb 2020</td>
-                                <td><div class="progress" style="height: 6px;">
-                                        <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 40%"></div>
-                                    </div></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
+ 
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="card radius-10">
@@ -464,7 +393,7 @@
                     </div>
                 </div>
             </div><!--end row-->
-
+            @endrole
         </div>
     </div>
 @endsection
@@ -475,5 +404,28 @@
     <script src="assets/plugins/chartjs/js/Chart.min.js"></script>
     <script src="assets/plugins/chartjs/js/Chart.extension.js"></script>
     <script src="assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    
+    @role('Security Guards') 
+    <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
+    @else
     <script src="assets/js/index.js"></script>
+    @
+    @endrole
+<script>
+ $(document).ready(function() {
+    var table = $('#arrivals').DataTable( {
+        "ajax": "/transactions/incoming-trn-dt",
+        "columns": [
+            {
+                "orderable": true,
+                "data": null,
+                "defaultContent": ''
+            },
+            { "data": 'vehicle_no'},
+            { "data": "status" },
+            { "data": "action" }
+        ]
+    } );
+ });  
+</script>    
 @endsection

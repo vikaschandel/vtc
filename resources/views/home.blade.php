@@ -3,7 +3,7 @@
     <head> 
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>VTC - Laravel Admin Starter</title>
+        <title>VTC</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +31,6 @@
 		            <h6>Hello <span class="text-danger">Artisan</span>,</h6>
 		            <h1 class="m-5">This is your homepage!</h1>
 		            <a href="{{url('login')}}" class="btn btn-success">Go to Admin</a>
-		            <a href="https://documenter.getpostman.com/view/11223504/Szmh1vqc?version=latest" class="btn btn-danger">API Endpoint</a>
-		            
 		            
 		        </div>
 

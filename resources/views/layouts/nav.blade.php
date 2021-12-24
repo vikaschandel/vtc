@@ -11,6 +11,9 @@
                 </div>
             </div>
             <!--navigation-->
+            @role('Security Guards') 
+
+            @else 
             <ul class="metismenu" id="menu">
                 <li>
                     <a href="{{ url('dashboard') }}" class="has-arrow">
@@ -142,6 +145,8 @@
                 </li>
                 @endcan
             </ul>
+            @endrole
             <!--end navigation-->
         </div>
         <!--end sidebar wrapper -->
+    
