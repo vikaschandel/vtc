@@ -223,12 +223,12 @@ class TransactionData extends Controller
                 $lanes = $qry->toArray();
                 $singleD = call_user_func_array('array_merge', $lanes);
                 if(!empty($singleD)){
-                    $laneid = $singleD;
+                    $laneid = $singleD['id'];
                 }
                 else{
                     $laneid = '000';
                 }
-                //echo "<pre>"; print_r($singleD); die;
+               // echo "<pre>"; print_r($singleD['id']); die;
                 $chk = Transaction::where('lr', $_POST["lr"])->get();
                 $co = count($chk);
                 if($co>0){
@@ -252,7 +252,9 @@ class TransactionData extends Controller
                     'idate' => $_POST['idate'],
                     'status' => '1',
                 ]);
+
                $transaction->save();
+               //die;
                $lid = $transaction->id;
                $prefix = "TRN-000";
                $transaction_id = $prefix.''.$lid;
