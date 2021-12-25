@@ -74,7 +74,7 @@
 	<!-- Bootstrap JS -->
     <script type="text/javascript">
     function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en',includedLanguages: 'hi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    new google.translate.TranslateElement({pageLanguage: 'en',includedLanguages: 'hi,en,pa,te', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
    </script>
 
