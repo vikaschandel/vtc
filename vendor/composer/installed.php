@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '04a1314de8785a1900cef4b7ff10ec8aeb757da3',
+        'reference' => '373c61d28d2fa9af2f04c01d433872c2a24871f9',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -472,7 +472,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '04a1314de8785a1900cef4b7ff10ec8aeb757da3',
+            'reference' => '373c61d28d2fa9af2f04c01d433872c2a24871f9',
             'dev_requirement' => false,
         ),
         'laravel/passport' => array(
@@ -1210,6 +1210,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'silviolleite/laravelpwa' => array(
+            'pretty_version' => '2.0.3',
+            'version' => '2.0.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../silviolleite/laravelpwa',
+            'aliases' => array(),
+            'reference' => '5f7135d2ee870af01793c9fdf6b1b932b546e20e',
+            'dev_requirement' => false,
         ),
         'spatie/laravel-permission' => array(
             'pretty_version' => '3.18.0',

@@ -40,16 +40,14 @@
         padding: 5px !important;
         border-radius: 10px !important;
     }     
-    </style>    
+    </style>   
+ @laravelPWA    
 </head>
 
 <body>
 	<!--wrapper-->
-    @role('Security Guards') 
-	<div class="wrapper toggled">
-    @else
-    <div class="wrapper">
-    @endrole     
+	<div class="wrapper">
+   
 		<!--start header -->
 		@include("layouts.header")
 		<!--end header -->

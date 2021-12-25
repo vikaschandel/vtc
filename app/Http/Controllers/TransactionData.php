@@ -130,8 +130,10 @@ class TransactionData extends Controller
         else{
             echo "You don't have the access";
         }
-        //return Response::json(['data' => $array_out]);
+       
     }
+
+    /************************* Incoming transaction datatable API **************************/  
 
     public function incoming_trans_dt() 
     {
@@ -145,7 +147,7 @@ class TransactionData extends Controller
                 $warr = explode(',', $ass);
                 $trns = array();
                 foreach($warr as $w){
-                    $tqry = Transaction::where('destination', $w)->get();
+                    $tqry = Transaction::where('destination', $w)->where('status', 1)->get();
                     $res = count($tqry);
                     if($res > 0){
                         $trns[]= $tqry->toArray();
@@ -156,11 +158,11 @@ class TransactionData extends Controller
                 $data = $userTrans;
                 return Datatables::of($data)
                 ->addColumn('status', function($data){
-                    $stat = '<div class="badge rounded-pill text-warning bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Incoming</div>';
+                    $stat = '<h5>'.$data['vehicle_no'].'</h5><div class="badge rounded-pill text-danger bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Incoming</div>';
                     return $stat;
                 })
                 ->addColumn('action', function($data){
-                    $button = '<button type="button" id="'.$data['id'].'" class="btn btn-primary px-3 radius-30">Click for Gate Entry</button>'; 
+                    $button = '<a href="'.url('transactions/entry/'.$data['id']).'"><span class="btn btn-primary px-3 radius-30">Click for Gate Entry</span></a>'; 
                     return $button;
                 })
                 ->rawColumns(['status','action'])
@@ -169,6 +171,28 @@ class TransactionData extends Controller
         else{
             echo "You don't have the access";
         }
+    }
+
+    /************************* Incoming Transaction entry to warehouse **************************/ 
+
+    public function vehicle_entry(Request $request){
+
+        try{
+            
+            $txn = Transaction::find($request->id);
+
+            $update = $txn->update([
+                'status' => 2,
+            ]);
+
+            return redirect()->back()->with('success', 'Transaction updated succesfully!');
+
+        }catch (\Exception $e) {
+            $bug = $e->getMessage();
+            return redirect()->back()->with('error', $bug);
+
+        }
+
     }
 
    ////////////////////////////////////  Get Assigned Warehouses //////////////////////////////////////

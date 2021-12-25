@@ -8,29 +8,25 @@
     <div class="page-wrapper">
         <div class="page-content">
            @role('Security Guards') 
+           @include('include.message')
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <h6 class="mb-0">Recent Orders</h6>
+                            <h6 class="mb-0">Latest transactions</h6>
                         </div>
                         <div class="dropdown ms-auto">
                             <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a>
+                                <li><a class="dropdown-item" href="javascript:;">Logout</a>
                                 </li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
+                                <li><a class="dropdown-item" href="javascript:;">Incomings</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                <?php $title = array("","Vehicle No", "Status", "Action");?>
+                <?php $title = array("","Vehicle No", "Action");?>
                 <div class="table-responsive">
 							<table class="table mb-0" id="arrivals">
                                 <h2 class="theads">ARRIVALS </h2>
@@ -404,7 +400,6 @@
     <script src="assets/plugins/chartjs/js/Chart.min.js"></script>
     <script src="assets/plugins/chartjs/js/Chart.extension.js"></script>
     <script src="assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-    
     @role('Security Guards') 
     <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
     @else
@@ -421,11 +416,11 @@
                 "data": null,
                 "defaultContent": ''
             },
-            { "data": 'vehicle_no'},
-            { "data": "status" },
+            { "data": 'status'},
             { "data": "action" }
         ]
     } );
- });  
+ }); 
+ 
 </script>    
 @endsection
