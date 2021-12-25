@@ -114,7 +114,7 @@ tr.shown td.dt-control {
                 <div class="card-body">
                 <div class="table-responsive">
 							<table class="table mb-0 display" id="dept">
-								<thead class="table-dark">
+								<thead class="table-light">
                                 <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
 								</thead>
 								<tbody>
@@ -150,7 +150,7 @@ function format ( d ) {
     ''+d.route+'<br/>'+
     '</div>'+
     '<div class="col-md-9">'+
-    '<div id="map-'+d.id+'" style="height: 40vh; width: 100%" ></div>'+
+    '<div id="map-'+d.id+'" style="height: 30vh; width: 100%" ></div>'+
     '<script type="text/javascript">\n' + 
                     "var map = new google.maps.Map(document.getElementById('map-"+d.id+"'), {zoom: 8, center: 'Delhi',});\n"+
                     "var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': false});\n"+
