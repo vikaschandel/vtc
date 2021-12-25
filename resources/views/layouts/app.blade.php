@@ -28,7 +28,7 @@
     <title>VTC</title>
     @laravelPWA
     <style>
-        #google_translate_element{width:300px;float:right;text-align:right;display:block}
+        #google_translate_element{float:right;text-align:right;display:block}
         .goog-te-banner-frame.skiptranslate { display: none !important;} 
         body { top: 0px !important; }
         #goog-gt-tt{display: none !important; top: 0px !important; } 
