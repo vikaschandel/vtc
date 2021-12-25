@@ -11,25 +11,10 @@
            @include('include.message')
             <div class="card radius-10">
                 <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <h6 class="mb-0">Latest transactions</h6>
-                        </div>
-                        <div class="dropdown ms-auto">
-                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Logout</a>
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:;">Incomings</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 <?php $title = array("Vehicle No", "Action");?>
                 <div class="table-responsive">
 							<table class="table mb-0" id="arrivals">
-                                <h2 class="theads">ARRIVALS </h2>
+                                <h2 class="theads" style="text-align:center;">ARRIVALS </h2>
 								<thead class="table-light">
                                 <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
 								</thead>
@@ -411,6 +396,7 @@
  $(document).ready(function() {
     var table = $('#arrivals').DataTable( {
         "ajax": "/transactions/incoming-trn-dt",
+        "bPaginate": false,
         "columns": [
             { "data": 'status'},
             { "data": "action" }
