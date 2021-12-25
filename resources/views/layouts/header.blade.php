@@ -19,63 +19,8 @@
                             <li>
                             <div id="google_translate_element"></div>
                             </li>
-                            <li class="nav-item dropdown dropdown-large">
-                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="row row-cols-3 g-3 p-3">
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-store'></i>
-                                            </div>
-                                            <div class="app-title">Warehouse</div>
-                                        </div>
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bx-bus'></i>
-                                            </div>
-                                            <div class="app-title">Vehicles</div>
-                                        </div>
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-lush text-white"><i class="bx bx-repeat"></i>
-                                            </div>
-                                            <div class="app-title">Transporters</div>
-                                        </div>
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class="bx bx-map"></i>
-                                            </div>
-                                            <div class="app-title">Lanes</div>
-                                        </div>
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-blues text-dark"><i class='bx bx-message-square-edit'></i>
-                                            </div>
-                                            <div class="app-title">Products</div>
-                                        </div>
-                                        <div class="col text-center">
-                                            <div class="app-box mx-auto bg-gradient-moonlit text-white"><i class="fadeIn animated bx bx-import"></i>
-                                            </div>
-                                            <div class="app-title">Imports</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown dropdown-large">
-                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
-                                    <i class='bx bx-bell'></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="javascript:;">
-                                        <div class="msg-header">
-                                            <p class="msg-header-title">Notifications</p>
-                                            <p class="msg-header-clear ms-auto">Marks all as read</p>
-                                        </div>
-                                    </a>
-                                    <div class="header-notifications-list">
 
-                                    </div>
-                                    <a href="javascript:;">
-                                        <div class="text-center msg-footer">View All Notifications</div>
-                                    </a>
-                                </div>
-                            </li>
+                            
                             <li class="nav-item dropdown dropdown-large">
                                 <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
                                     <i class='bx bx-comment'></i>
