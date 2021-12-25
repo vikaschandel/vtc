@@ -390,7 +390,6 @@
     <style>.dataTables_filter, .dataTables_info { display: none; }</style>
     @else
     <script src="assets/js/index.js"></script>
-    @
     @endrole
 <script>
  $(document).ready(function() {

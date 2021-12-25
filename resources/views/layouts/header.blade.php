@@ -19,25 +19,26 @@
                             <li>
                             <div id="google_translate_element"></div>
                             </li>
-
-                            
                             <li class="nav-item dropdown dropdown-large">
-                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
-                                    <i class='bx bx-comment'></i>
-                                </a>
+
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="javascript:;">
-                                        <div class="msg-header">
-                                            <p class="msg-header-title">Messages</p>
-                                            <p class="msg-header-clear ms-auto">Marks all as read</p>
-                                        </div>
-                                    </a>
+
+                                    <div class="header-notifications-list">
+
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown dropdown-large">
+
+                                <div class="dropdown-menu dropdown-menu-end">
+
                                     <div class="header-message-list">
                 
                                     </div>
-                                    <a href="javascript:;">
-                                        <div class="text-center msg-footer">View All Messages</div>
-                                    </a>
+
                                 </div>
                             </li>
                         </ul>
@@ -47,7 +48,7 @@
                         <i class="fadeIn animated bx bx-user-circle" class="user-img" style="font-size:32px;"></i>
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">Eternity Solutions</p>
-                                <p class="designattion mb-0">Admin Manager</p>
+                                <p class="designattion mb-0">User Loggedin </p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">

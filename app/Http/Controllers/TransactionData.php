@@ -124,7 +124,23 @@ class TransactionData extends Controller
 
                     return $trps;
                 })
-                ->rawColumns(['route', 'transporters',])
+                ->addColumn('status', function($data){
+                    if($data['status'] == 0){
+                     $st = '<span class="badge alert bg-secondary shadow-sm">Unknown</span>';
+                    } 
+                    elseif($data['status'] == 1){
+                        $st = '<span class="badge bg-info shadow-sm">Incoming</span>';    
+                    }
+                    elseif($data['status'] == 2){
+                        $st = '<span class="badge bg-success">Received</span>';    
+                    }
+                    elseif($data['status'] == 3){
+                        $st = '<span class="badge bg-gradient-bloody text-white shadow-sm ">Delayed</span>';  
+                    }
+
+                    return $st;
+                })
+                ->rawColumns(['route', 'transporters', 'status'])
                 ->make(true);
         }
         else{

@@ -109,7 +109,7 @@ tr.shown td.dt-control {
             <!-- start message area-->
             @include('include.message')
             <!-- end message area-->
-            <?php $title = array("","Vehicle No", "Route", "Started", "ETA", "Status");?>
+            <?php $title = array("","Vehicle No", "Route", "Started", "Transit Load", "Status");?>
             <div class="card">
                 <div class="card-body">
                 <div class="table-responsive">
@@ -139,11 +139,18 @@ function format ( d ) {
 
     // `d` is the original data object for the row
     return '<div class="row">'+
-    '<div class="col-md-4">'+
-    'jiiii'+
+    '<div class="col-md-3">'+
+    '<strong>#TXNS Id:</strong> '+d.tid+'<br/>'+
+    '<strong>Driver:</strong> '+d.driver+'<br/>'+
+    '<strong>Lr No:</strong> '+d.lr+'<br/>'+
+    '<strong>Seal:</strong> '+d.seal+'<br/>'+
+    '<strong>Product:</strong> '+d.product+'<br/>'+
+    '<strong>Invoice:</strong> '+d.invoice+'<br/>'+
+    '<strong>Inv Date:</strong> '+d.idate+'<br/><br/>'+
+    ''+d.route+'<br/>'+
     '</div>'+
-    '<div class="col-md-8">'+
-    '<div id="map-'+d.id+'" style="height: 50vh; width: 100%" ></div>'+
+    '<div class="col-md-9">'+
+    '<div id="map-'+d.id+'" style="height: 40vh; width: 100%" ></div>'+
     '<script type="text/javascript">\n' + 
                     "var map = new google.maps.Map(document.getElementById('map-"+d.id+"'), {zoom: 8, center: 'Delhi',});\n"+
                     "var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': false});\n"+
@@ -184,7 +191,7 @@ $(document).ready(function() {
             { "data": "route" },
             { "data": "start_date" },
             { "data": "transit_load" },
-            { "data": "lane" },
+            { "data": "status" },
         ],
         "order": [[1, 'asc']]
     } );
