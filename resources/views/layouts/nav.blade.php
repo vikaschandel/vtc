@@ -12,7 +12,9 @@
             </div>
             <!--navigation-->
             @role('Security Guards') 
-
+            <ul>
+            <li><a class="" href="{{ __('/logout')}}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+           </ul>
             @else 
             <ul class="metismenu" id="menu">
                 <li>
