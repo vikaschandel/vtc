@@ -26,7 +26,7 @@
                             </ul>
                         </div>
                     </div>
-                <?php $title = array("","Vehicle No", "Action");?>
+                <?php $title = array("Vehicle No", "Action");?>
                 <div class="table-responsive">
 							<table class="table mb-0" id="arrivals">
                                 <h2 class="theads">ARRIVALS </h2>
@@ -411,11 +411,6 @@
     var table = $('#arrivals').DataTable( {
         "ajax": "/transactions/incoming-trn-dt",
         "columns": [
-            {
-                "orderable": true,
-                "data": null,
-                "defaultContent": ''
-            },
             { "data": 'status'},
             { "data": "action" }
         ]
