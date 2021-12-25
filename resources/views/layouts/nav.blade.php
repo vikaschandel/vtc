@@ -12,9 +12,15 @@
             </div>
             <!--navigation-->
             @role('Security Guards') 
-            <ul>
-            <li><a class="" href="{{ __('/logout')}}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
-           </ul>
+            <ul class="metismenu" id="menu">
+                <li>
+                <a class="" href="{{ __('/logout')}}">
+                        <div class="parent-icon"><i class='bx bx-log-out-circle'></i>
+                        </div>
+                        <div class="menu-title">Logout</div>
+                    </a>
+                </li>
+              </ul>
             @else 
             <ul class="metismenu" id="menu">
                 <li>
