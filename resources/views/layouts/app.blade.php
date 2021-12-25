@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ url('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/header-colors.css') }}" />
     <title>VTC</title>
-    @laravelPWA  
+    @laravelPWA
     <style>
         #google_translate_element{width:300px;float:right;text-align:right;display:block}
         .goog-te-banner-frame.skiptranslate { display: none !important;} 
