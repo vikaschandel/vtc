@@ -402,7 +402,6 @@
     <script src="assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
     @role('Security Guards') 
     <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-    <style>.dataTables_filter, .dataTables_info, .dataTables_length { display: none; }</style>
     @else
     <script src="assets/js/index.js"></script>
     @
