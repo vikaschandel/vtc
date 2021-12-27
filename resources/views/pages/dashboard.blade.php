@@ -2,6 +2,35 @@
 @section("style")
     <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+    <style>
+        .list-group {
+            width: 400px !important
+        }
+
+        .list-group-item {
+            margin-top: 10px;
+            border-radius: none;
+            background: #5E35B1;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out
+        }
+
+        .list-group-item:hover {
+            transform: scaleX(1.1)
+        }
+
+        .about span {
+            font-size: 12px;
+            margin-right: 10px;
+            color:#000;
+        }
+        .ml-2 {
+            margin-left: 10px;
+        }
+        .page-content {
+	padding: 0 !important;
+}
+    </style>
 @endsection
 
 @section("wrapper")
@@ -9,21 +38,63 @@
         <div class="page-content">
            @role('Security Guards') 
            @include('include.message')
-            <div class="card radius-10">
-                <div class="card-body">
-                <?php $title = array("Vehicle No", "Action");?>
-                <div class="table-responsive">
-							<table class="table mb-0" id="arrivals">
-                                <h2 class="theads" style="text-align:center;">ARRIVALS </h2>
-								<thead class="table-light">
-                                <tr><?php foreach($title as $t) echo "<th>$t</th>"; ?></tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-                </div>
+            <div class="container d-flex justify-content-center">
+                <ul class="list-group mt-5 text-white">
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary radius-30">Enter </button></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-content-center">
+                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                            <div class="ml-2">
+                                <h6 class="mb-0">PB 65A X 7625</h6>
+                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                            </div>
+                        </div>
+                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
+                    </li>
+                </ul>
             </div>
             @else
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
