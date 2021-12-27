@@ -242,16 +242,6 @@
         });
     }
 
-$(document).ready(function () {
-    $location_input = $("#location");
-    autocomplete = new google.maps.places.Autocomplete($location_input.get(0));    
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var data = $("#search_form").serialize();
-        console.log('blah')
-        alert(data);
-        return false;
-    });
-});
 </script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
