@@ -193,10 +193,16 @@ class TransactionData extends Controller
 
     public function vehicle_entry(Request $request){
 
+       // echo "<pre>";print_r($_POST);
+       echo "<pre>";print_r($request);die;
         try{
             
-            $txn = Transaction::find($request->id);
-
+            $txn = Transaction::find($request->tid);
+            $file = request()->file;
+            //$filename = 'entry-' . time() . '.' . $file->getClientOriginalExtension();
+            //echo $path = $file->storeAs('entry', $filename);
+            echo "<pre>";print_r($file);die;
+            die;
             $update = $txn->update([
                 'status' => 2,
             ]);

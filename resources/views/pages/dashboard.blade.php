@@ -1,5 +1,6 @@
 @extends("layouts.app")
 @section("style")
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
     <style>
@@ -34,7 +35,7 @@
             border-radius: 3px;
             padding: 5px 10px;
         }
-        .mb-0 {
+        .list-group .mb-0 {
                 margin-bottom: 0 !important;
                 font-size: 21px;
             }
@@ -43,6 +44,9 @@
                 padding-top: 5px;
                 color:#000;
             }
+         .list-group td {
+            font-size: 18px;
+        }
     </style>
 @endsection
 
@@ -53,17 +57,21 @@
            @include('include.message')
             <div class="container d-flex justify-content-center">
                 <ul class="list-group mt-5 text-white">
+                    <h4 class="justify-content-center">Incoming Vehicles</h4>
+                    @if(!empty($data))
                     @foreach($data as $inv)
                     <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex ttt flex-row"><span> IND </span>
+                        <div class="d-flex ttt flex-row"><span  translate="no"> IND </span>
                             <div class="ml-2">
-                                <h6 class="mb-0">{{ $inv['vehicle_no'] }}</h6>
+                                <h6 class="mb-0" translate="no">{{ $inv['vehicle_no'] }}</h6>
                             </div>
                         </div>
                         <div class="check"><button type="button" data-bs-toggle="modal" data-bs-target="#enter_id_{{ $inv['id'] }}" class="btn btn-primary px-3 radius-30">Enter</button></div>		
                     </li>
                     <!-- Modal -->
                     <div class="modal fade" id="enter_id_{{ $inv['id'] }}" tabindex="-1" aria-hidden="true">
+                           <form id="update_txn_{{ $inv['id'] }}" class="row" enctype="multipart/form-data">
+                             @csrf  
 								<div class="modal-dialog modal-dialog-centered">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -75,9 +83,9 @@
                                         <tr>
                                             <th>Vehicle No</th>
                                             <td>
-                                            <div class="d-flex ttt flex-row" style="width:65%"><span> IND </span>
+                                            <div class="d-flex ttt flex-row" style="width:65%"><span translate="no"> IND </span>
                                                 <div class="ml-2">
-                                                    <h6 class="mb-0">{{ $inv['vehicle_no'] }}</h6>
+                                                    <h6 class="mb-0" translate="no">{{ $inv['vehicle_no'] }}</h6>
                                                 </div>
                                             </div> 
                                             </td>
@@ -100,18 +108,22 @@
                                         </tr>
                                         <tr>
                                             <th>Upload Photo</th>
-                                            <td><input type="file" id="myfile" name="myfile"></td>
+                                            <td><input type="file" id="entryFile_{{ $inv['id'] }}" name="entryFile_{{ $inv['id'] }}"></td>
                                         </tr>
                                     </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Verify</button>
+                                        <button type="button" onClick="updateEntery({{ $inv['id'] }})" class="btn btn-primary">Verify</button>
                                     </div>
 							   </div>
 						</div>
+                        </form>
 					</div>                    
                     @endforeach 
+                   @else
+                   <p> No Vehicle found</p>
+                   @endif 
                 </ul>
             </div>
             @else
@@ -491,6 +503,27 @@
         ]
     } );
  }); 
- 
+ $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+}); 
+function updateEntery( id ) {
+    
+    var fd = new FormData();  
+    //var efile = $('#entryFile_'+id).val(); \
+    fd.append('file', $('#entryFile_'+id)[0].files[0]);
+    fd.append('tid', id);
+    $.ajax({
+    url: 'transactions/entry/',
+    data: fd,
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function(data){
+        alert(data);
+    }
+});
+}
 </script>    
 @endsection
