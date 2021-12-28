@@ -40,11 +40,7 @@ Route::group(['middleware' => 'auth'], function(){
 	// logout route
 	Route::get('/logout', [LoginController::class,'logout']);
 	Route::get('/clear-cache', [HomeController::class,'clearCache']);
-
-	// dashboard route  
-	Route::get('/dashboard', function () { 
-		return view('pages.dashboard'); 
-	})->name('dashboard');
+	Route::get('/dashboard', [HomeController::class,'dashboard']);
 
 	//only those have manage_user permission will get access
 	Route::group(['middleware' => 'can:manage_user|manage_user'], function(){

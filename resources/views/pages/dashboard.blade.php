@@ -27,9 +27,22 @@
         .ml-2 {
             margin-left: 10px;
         }
-        .page-content {
-	padding: 0 !important;
-}
+
+        .d-flex.ttt.flex-row {
+            background: #f9be10;
+            border: 2px solid #000;
+            border-radius: 3px;
+            padding: 5px 10px;
+        }
+        .mb-0 {
+                margin-bottom: 0 !important;
+                font-size: 21px;
+            }
+            .list-group span {
+                font-size: 10px;
+                padding-top: 5px;
+                color:#000;
+            }
     </style>
 @endsection
 
@@ -40,60 +53,65 @@
            @include('include.message')
             <div class="container d-flex justify-content-center">
                 <ul class="list-group mt-5 text-white">
+                    @foreach($data as $inv)
                     <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
+                        <div class="d-flex ttt flex-row"><span> IND </span>
                             <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
+                                <h6 class="mb-0">{{ $inv['vehicle_no'] }}</h6>
                             </div>
                         </div>
-                        <div class="check"><button type="button" class="btn btn-primary radius-30">Enter </button></div>
+                        <div class="check"><button type="button" data-bs-toggle="modal" data-bs-target="#enter_id_{{ $inv['id'] }}" class="btn btn-primary px-3 radius-30">Enter</button></div>		
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                            <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
-                            </div>
-                        </div>
-                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                            <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
-                            </div>
-                        </div>
-                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                            <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
-                            </div>
-                        </div>
-                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                            <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
-                            </div>
-                        </div>
-                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40" />
-                            <div class="ml-2">
-                                <h6 class="mb-0">PB 65A X 7625</h6>
-                                <div class="about"> <span>Corage, Fertera</span> <span>Jan 21, 2020</span> </div>
-                            </div>
-                        </div>
-                        <div class="check"><button type="button" class="btn btn-primary px-2 radius-30">Enter </button></div>
-                    </li>
+                    <!-- Modal -->
+                    <div class="modal fade" id="enter_id_{{ $inv['id'] }}" tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+												<h5 class="modal-title">Verify Details</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+									<div class="modal-body">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Vehicle No</th>
+                                            <td>
+                                            <div class="d-flex ttt flex-row" style="width:65%"><span> IND </span>
+                                                <div class="ml-2">
+                                                    <h6 class="mb-0">{{ $inv['vehicle_no'] }}</h6>
+                                                </div>
+                                            </div> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Driver Name</th>
+                                            <td>{{ $inv['driver'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Load - MT</th>
+                                            <td>{{ $inv['transit_load'] }}MT</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Invoice Details</th>
+                                            <td>{{ $inv['invoice'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>LR No</th>
+                                            <td>{{ $inv['lr'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Upload Photo</th>
+                                            <td><input type="file" id="myfile" name="myfile"></td>
+                                        </tr>
+                                    </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Verify</button>
+                                    </div>
+							   </div>
+						</div>
+					</div>                    
+                    @endforeach 
                 </ul>
             </div>
             @else
