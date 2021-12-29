@@ -122,7 +122,7 @@
 					</div>                    
                     @endforeach 
                    @else
-                   <p> No Vehicle found</p>
+                   <p style="color:red;font-size:16px;"> No Vehicle found</p>
                    @endif 
                 </ul>
             </div>
@@ -487,8 +487,10 @@
     <script src="assets/plugins/chartjs/js/Chart.extension.js"></script>
     <script src="assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
     @role('Security Guards') 
+    <link href="{{ asset('css/sweetalert2.min.css') }}">
     <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
     <style>.dataTables_filter, .dataTables_info { display: none; }</style>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     @else
     <script src="assets/js/index.js"></script>
     @endrole
@@ -521,7 +523,15 @@ function updateEntery( id ) {
     contentType: false,
     type: 'POST',
     success: function(data){
-        alert(data);
+        if(data.success == true){ // if true (1)
+            swal("success!", "Vehicle Verified", "success");
+            setTimeout(function(){// wait for 5 secs(2)
+                location.reload(); // then reload the page.(3)
+            }, 2000); 
+        }
+        else{
+            alert(data.message);
+        }
     }
 });
 }

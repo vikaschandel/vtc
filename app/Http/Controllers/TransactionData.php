@@ -193,21 +193,27 @@ class TransactionData extends Controller
 
     public function vehicle_entry(Request $request){
 
-       // echo "<pre>";print_r($_POST);
-       echo "<pre>";print_r($request);die;
+
         try{
-            
+
+            $file = $request->file('file');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $path = $file->storeAs('vehicles', $filename);
+            if($path){
             $txn = Transaction::find($request->tid);
-            $file = request()->file;
-            //$filename = 'entry-' . time() . '.' . $file->getClientOriginalExtension();
-            //echo $path = $file->storeAs('entry', $filename);
-            echo "<pre>";print_r($file);die;
-            die;
             $update = $txn->update([
                 'status' => 2,
+                'filepath' => $path
             ]);
-
-            return redirect()->back()->with('success', 'Transaction updated succesfully!');
+            $response['success'] = true;
+            $response['message'] = 'Success';
+            return Response::json($response);
+           }
+           else{
+            $response['success'] = false;
+            $response['message'] = 'Error';
+            return Response::json($response);
+           }
 
         }catch (\Exception $e) {
             $bug = $e->getMessage();
