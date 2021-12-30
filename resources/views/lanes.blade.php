@@ -41,6 +41,7 @@
                                 <th>{{ __('Destination')}}</th>
                                 <th>{{ __('Vehicle Type')}}</th>
                                 <th>{{ __('Lead Time')}}</th>
+                                <th>{{ __('Transporter')}}</th>
                                 <th>{{ __('Action')}}</th>
                             </tr>
                         </thead>

@@ -59,7 +59,7 @@
                     <form id="add_lane" class="row" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group"><label>Origin ( <a class="" onclick="getCurrentPosition()">Set Current Location</a>)</label>
-                            <input class="form-control" id="from_places" placeholder=""/>
+                            <input class="form-control" id="from_places" placeholder="Enter City Name of warehouse Location"/>
                             <input id="origin" name="origin" required="" type="hidden"/>
                             <div class="swapper" onclick="switchText()"><i class="fadeIn animated bx bx-repost"></i></div>
                         </div>
@@ -159,7 +159,7 @@
                 var from_lat = from_place.geometry.location.lat();
                 var from_lng = from_place.geometry.location.lng();
                 var from_cords = from_lat+','+from_lng;
-               // console.log(cords);
+                console.log(from_place);
                 $('#origin').val(from_address);
             });
 

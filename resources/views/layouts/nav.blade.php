@@ -1,5 +1,5 @@
 <!--sidebar wrapper -->
-<div class="sidebar-wrapper" data-simplebar="true">
+<div class="sidebar-wrapper" data-simplebar="true" onmouseover="mouseOver()" onmouseout="mouseOut()">
             <div class="sidebar-header">
                 <div>
                     <img src="{{ url('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">

@@ -31,6 +31,7 @@
                     {data:'destination', name: 'destination'},
                     {data:'vehicle_type', name: 'vehicle_type'},
                     {data:'lead_time', name: 'lead_time'},
+                    {data:'transporters', name: 'transporters'},
                     {data:'action', name: 'action'}
                 ],
                 buttons: [

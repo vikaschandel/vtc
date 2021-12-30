@@ -47,8 +47,11 @@
 
 <body>
 	<!--wrapper-->
+	@role('Security Guards') 
 	<div class="wrapper">
-   
+	@else	
+	<div class="wrapper toggled">
+     @endrole
 		<!--start header -->
 		@include("layouts.header")
 		<!--end header -->
@@ -76,6 +79,16 @@
     function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en',includedLanguages: 'hi,en,pa,te', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
+	function mouseOver() {
+    $('.wrapper').addClass('sidebar-hovered');
+	$('.wrapper').removeClass('toggled');
+    }
+
+	function mouseOut() {
+    $('.wrapper').removeClass('sidebar-hovered');
+	$('.wrapper').addClass('toggled');
+    }
+
    </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

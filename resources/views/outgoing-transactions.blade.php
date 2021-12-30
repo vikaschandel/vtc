@@ -138,20 +138,66 @@ tr.shown td.dt-control {
 function format ( d ) {
 
     // `d` is the original data object for the row
-    return '<div class="row">'+
-    '<div class="col-md-3">'+
-    '<strong>#TXNS Id:</strong> '+d.tid+'<br/>'+
-    '<strong>Driver:</strong> '+d.driver+'<br/>'+
-    '<strong>Lr No:</strong> '+d.lr+'<br/>'+
-    '<strong>Seal:</strong> '+d.seal+'<br/>'+
-    '<strong>Product:</strong> '+d.product+'<br/>'+
-    '<strong>Invoice:</strong> '+d.invoice+'<br/>'+
-    '<strong>Inv Date:</strong> '+d.idate+'<br/><br/>'+
-    ''+d.route+'<br/>'+
-    '</div>'+
-    '<div class="col-md-9">'+
-    '<div id="map-'+d.id+'" style="height: 30vh; width: 100%" ></div>'+
-    '<script type="text/javascript">\n' + 
+    return '<div class="card">'+
+				'<div class="card-body">'+
+								'<ul class="nav nav-tabs nav-primary" role="tablist">'+
+									'<li class="nav-item" role="presentation">'+
+										'<a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">'+
+											'<div class="d-flex align-items-center">'+
+												'<div class="tab-icon"><i class="bx bx-home font-18 me-1"></i>'+
+												'</div>'+
+												'<div class="tab-title">TXN Details</div>'+
+											'</div>'+
+										'</a>'+
+									'</li>'+
+									'<li class="nav-item" role="presentation">'+
+										'<a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab" aria-selected="false">'+
+											'<div class="d-flex align-items-center">'+
+												'<div class="tab-icon"><i class="bx bx-user-pin font-18 me-1"></i>'+
+												'</div>'+
+												'<div class="tab-title">Timeline</div>'+
+											'</div>'+
+										'</a>'+
+									'</li>'+
+									'<li class="nav-item" role="presentation">'+
+										'<a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab" aria-selected="true">'+
+											'<div class="d-flex align-items-center">'+
+												'<div class="tab-icon"><i class="bx bx-microphone font-18 me-1"></i>'+
+												'</div>'+
+												'<div class="tab-title">Others</div>'+
+											'</div>'+
+										'</a>'+
+									'</li>'+
+								'</ul>'+
+								'<div class="tab-content py-3">'+
+									'<div class="tab-pane active" id="primaryhome" role="tabpanel">'+
+                                    '<div class="row">'+
+                                    '<div class="col-md-3">'+
+                                    '<strong>#TXNS Id:</strong> '+d.tid+'<br/>'+
+                                    '<strong>Driver:</strong> '+d.driver+'<br/>'+
+                                    '<strong>Lr No:</strong> '+d.lr+'<br/>'+
+                                    '<strong>Seal:</strong> '+d.seal+'<br/>'+
+                                    '<strong>Product:</strong> '+d.product+'<br/>'+
+                                    '<strong>Invoice:</strong> '+d.invoice+'<br/>'+
+                                    '<strong>Inv Date:</strong> '+d.idate+'<br/><br/>'+
+                                    ''+d.route+'<br/>'+
+                                    '</div>'+
+                                    '<div class="col-md-9">'+
+                                    '<div id="map-'+d.id+'" style="height: 30vh; width: 100%" ></div>'+
+                                    '</div>'+
+                                    '</div>'+
+									'</div>'+
+                                    
+									'<div class="tab-pane fade" id="primaryprofile" role="tabpanel">'+
+										'<img src="'+d.filepath+'">'+
+									'</div>'+
+									'<div class="tab-pane fade show" id="primarycontact" role="tabpanel">'+
+										'<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeneys organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven</p>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+               '<script type="text/javascript">\n' + 
                     "var map = new google.maps.Map(document.getElementById('map-"+d.id+"'), {zoom: 8, center: 'Delhi',});\n"+
                     "var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': false});\n"+
                     "var directionsService = new google.maps.DirectionsService();\n"+
@@ -173,8 +219,8 @@ function format ( d ) {
                                     "alert('Unknown lane found with error code 0, contact your manager');\n"+
                                 "}\n"+
                     "});\n"+
-             '<\/script></div>'+
-    '</div>';
+             '<\/script>';
+
 }
 
 $(document).ready(function() {

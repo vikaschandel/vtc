@@ -198,7 +198,11 @@ class TransactionData extends Controller
 
             $file = $request->file('file');
             $filename = time().'_'.$file->getClientOriginalName();
-            $path = $file->storeAs('vehicles', $filename);
+            // File upload location
+            $location = 'files';
+            // Upload file
+            $file->move($location,$filename);
+            $path= url('files/'.$filename);
             if($path){
             $txn = Transaction::find($request->tid);
             $update = $txn->update([

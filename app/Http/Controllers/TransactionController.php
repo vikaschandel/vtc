@@ -509,15 +509,27 @@ class TransactionController extends Controller
             $cap_arr = implode(',' ,$_POST['vtype']);
             $o= $_POST['origin'];
             $or= explode(',', $o);
-            $origin = $or[0];
+            $verify = $or[0];
+            $pluscode_o = "+";
+            if (strpos($verify, $pluscode_o) !== false) {
+                $origin = $or[1];
+            } else {
+                $origin = $or[0];
+            }
             $d = $_POST['destination'];
             $de= explode(',', $d);
-            $destination = $de[0];
+            $verify_d = $de[0];
+            $pluscode_d = "+";
+            if (strpos($verify_d, $pluscode_d) !== false) {
+                $destination = $de[1];
+            } else {
+                $destination = $de[0];
+            }
             $vt = $_POST['vtype'];
             $c = 0;
             $earr = array();
             foreach($vt as $l){
-            $qry = lane::whereIn('from', [$origin, $destination])->whereIn('destination', [$origin, $destination])->whereRaw('FIND_IN_SET(?, vehicle_type)', [$l])->get();
+            $qry = lane::where('from', $origin)->where('destination', $destination)->whereRaw('FIND_IN_SET(?, vehicle_type)', [$l])->get();
             $co = count($qry);
             if($co > 0){
                 $c++; 
@@ -553,7 +565,6 @@ class TransactionController extends Controller
     {
         
         $data  = lane::get();
-
         return Datatables::of($data)->addColumn('action', function($data){
             if($data->name == 'Super Admin'){
                 return '';
@@ -566,7 +577,16 @@ class TransactionController extends Controller
                 return '';
             }
         })
-        ->rawColumns(['action'])
+        ->addColumn('transporters', function($data){
+            $getrp = Transaction::select('transporter')->where('lane', $data->id)->get();
+            $trps = '';
+            foreach($getrp as $trp){
+            $trps .= '<span class="badge bg-gradient-bloody text-white shadow-sm m-1">'.$trp->transporter.'</span>';
+            }
+            
+            return $trps;
+        })
+        ->rawColumns(['action', 'transporters'])
         ->make(true);
     }
 
