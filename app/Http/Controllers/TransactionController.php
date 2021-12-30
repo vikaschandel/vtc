@@ -578,7 +578,7 @@ class TransactionController extends Controller
             }
         })
         ->addColumn('transporters', function($data){
-            $getrp = Transaction::select('transporter')->where('lane', $data->id)->get();
+            $getrp = Transaction::select('transporter')->where('lane', $data->id)->distinct()->get();
             $trps = '';
             foreach($getrp as $trp){
             $trps .= '<span class="badge bg-gradient-bloody text-white shadow-sm m-1">'.$trp->transporter.'</span>';
