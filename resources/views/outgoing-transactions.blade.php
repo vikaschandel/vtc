@@ -109,7 +109,7 @@ tr.shown td.dt-control {
             <!-- start message area-->
             @include('include.message')
             <!-- end message area-->
-            <?php $title = array("","Vehicle No", "Route", "Started", "Transit Load", "Status");?>
+            <?php $title = array("","Vehicle No", "Route", "Started", "Transit Load", "Shipping", "Status");?>
             <div class="card">
                 <div class="card-body">
                 <div class="table-responsive">
@@ -189,7 +189,7 @@ function format ( d ) {
 									'</div>'+
                                     
 									'<div class="tab-pane fade" id="primaryprofile" role="tabpanel">'+
-										'<img src="'+d.filepath+'">'+
+										
 									'</div>'+
 									'<div class="tab-pane fade show" id="primarycontact" role="tabpanel">'+
 										'<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeneys organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven</p>'+
@@ -237,6 +237,7 @@ $(document).ready(function() {
             { "data": "route" },
             { "data": "start_date" },
             { "data": "transit_load" },
+            { "data": "shipping"},
             { "data": "status" },
         ],
         "order": [[1, 'asc']]

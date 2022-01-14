@@ -161,6 +161,7 @@
             columns: [
                 /*{data:'serial_no', name: 'serial_no'},*/
                 {data:'name', name: 'name', orderable: false, searchable: false},
+                {data:'warehouse', name: 'warehouse'},
                 {data:'email', name: 'email'},
                 {data:'roles', name: 'roles'},
                 {data:'permissions', name: 'permissions'},

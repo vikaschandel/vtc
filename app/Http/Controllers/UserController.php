@@ -40,6 +40,24 @@ class UserController extends Controller
         $data  = User::get();
 
         return Datatables::of($data)
+                ->addColumn('warehouse', function($data){
+                    if($data->id != 1){
+                    $uw = DB::table('warehouse_has_users')->select('wid')->where('uid', $data->id)->get();
+                    $res = $uw->toArray();
+                    $wid = $uw[0]->wid;
+                    $ids = str_split(str_replace(',', '', $wid));
+                    $wname = DB::table('warehouses')->select('warehouse')->whereIn('id', $ids)->get();
+                    $assignedware = '';
+                    foreach ($wname as $assigned) {
+                        $assignedware .= '<span class="badge bg-success text-white shadow-sm">'.$assigned->warehouse.'</span>';
+                    }
+                    return $assignedware;
+                  }
+                  else{
+                    $assignedware = 'All'; 
+                    return $assignedware;
+                  }
+                })
                 ->addColumn('roles', function($data){
                     $roles = $data->getRoleNames()->toArray();
                     $badge = '';
@@ -53,7 +71,7 @@ class UserController extends Controller
                     $roles = $data->getAllPermissions();
                     $badges = '';
                     foreach ($roles as $key => $role) {
-                        $badges .= '<span class="badge bg-gradient-quepal text-white shadow-sm">'.$role->name.'</span>';
+                        $badges .= '<span class="badge bg-dark text-white shadow-sm">'.$role->name.'</span>';
                     }
 
                     return $badges;
@@ -64,14 +82,14 @@ class UserController extends Controller
                     }
                     if (Auth::user()->can('manage_user')){
                         return '<div class="table-actions">
-                                <a href="'.url('user/'.$data->id).'" ><span class="badge bg-gradient-blooker ">Edit</span></a>
-                                <a href="'.url('user/delete/'.$data->id).'"><span class="badge bg-gradient-quepal">Delete</span></a>
+                                <a href="'.url('user/'.$data->id).'" ><span class="badge bg-gradient-quepal ">Edit</span></a>
+                                <a href="'.url('user/delete/'.$data->id).'"><span class="badge bg-danger">Delete</span></a>
                             </div>';
                     }else{
                         return '';
                     }
                 })
-                ->rawColumns(['roles','permissions','action'])
+                ->rawColumns(['warehouse','roles','permissions','action'])
                 ->make(true);
     }
 
@@ -141,12 +159,13 @@ class UserController extends Controller
         try
         {
             $user  = User::with('roles','permissions')->find($id);
+            //echo "<pre>";print_r($user);die;
 
             if($user){
                 $user_role = $user->roles->first();
                 $roles     = Role::pluck('name','id');
 
-                return view('user-edit', compact('user','user_role','roles'));
+                return view('user-edit',);
             }else{
                 return redirect('404');
             }

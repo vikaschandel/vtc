@@ -52,7 +52,7 @@ class RolesController extends Controller
                     $roles = $data->permissions()->get();
                     $badges = '';
                     foreach ($roles as $key => $role) {
-                        $badges .= '<span class="badge bg-gradient-bloody text-white shadow-sm m-1">'.$role->name.'</span>';
+                        $badges .= '<span class="badge bg-success text-white shadow-sm m-1">'.$role->name.'</span>';
                     }
                     if($data->name == 'Super Admin'){
                         return '<span class="badge badge-success m-1">All permissions</span>';
@@ -66,8 +66,7 @@ class RolesController extends Controller
                     }
                     if (Auth::user()->can('manage_roles')){
                         return '<div class="table-actions">
-                                    <a href="'.url('role/edit/'.$data->id).'" ><span class="badge bg-gradient-blooker ">Edit</span></a>
-                                    <a href="'.url('role/delete/'.$data->id).'"  ><span class="badge bg-gradient-quepal">Delete</span></a>
+                                    <a href="'.url('role/delete/'.$data->id).'"  ><span class="badge bg-danger">Delete</span></a>
                                 </div>';
                     }else{
                         return '';

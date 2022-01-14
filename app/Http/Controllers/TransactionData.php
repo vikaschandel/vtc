@@ -82,6 +82,7 @@ class TransactionData extends Controller
                 $res[$key]['lead_time'] = '0';
                 }
                 $res[$key]['start_date'] = date("d-m-Y", strtotime($date[0])); 
+
                 $res[$key]['source'] = $qry_sware[0]->warehouse;
                 $res[$key]['destination'] = $qry_dware[0]->warehouse;
                 $res[$key]['route_source'] = $qry_sware[0]->city.', '.$qry_sware[0]->state;
@@ -124,6 +125,15 @@ class TransactionData extends Controller
 
                     return $trps;
                 })
+                ->addColumn('shipping', function($data){
+                  //echo "<pre>";print_r($data);die;
+                     
+                    $bar = '<div class="progress" style="height: 6px;">
+                    <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
+                    </div>'; 
+
+                    return $bar;
+                })
                 ->addColumn('status', function($data){
                     if($data['status'] == 0){
                      $st = '<span class="badge alert bg-secondary shadow-sm">Unknown</span>';
@@ -140,7 +150,7 @@ class TransactionData extends Controller
 
                     return $st;
                 })
-                ->rawColumns(['route', 'transporters', 'status'])
+                ->rawColumns(['route', 'transporters','shipping','status'])
                 ->make(true);
         }
         else{

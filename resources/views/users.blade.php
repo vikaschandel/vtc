@@ -1,6 +1,11 @@
 @extends("layouts.app")
 
 @section("style")
+<style>
+    .badge {
+    margin-right: 5px;
+}
+</style>    
 <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @endsection
@@ -38,6 +43,7 @@
                         <thead>
                             <tr>
                                 <th>{{ __('Name')}}</th>
+                                <th>{{ __('Warehouse')}}</th>
                                 <th>{{ __('Email')}}</th>
                                 <th>{{ __('Role')}}</th>
                                 <th>{{ __('Permissions')}}</th>

@@ -1,51 +1,42 @@
-@extends('layouts.main') 
-@section('title', $user->name)
-@section('content')
-    <!-- push external head elements to head -->
-    @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
-    @endpush
+@extends("layouts.app")
+@section("style")
+<style>
+    .badge {
+    margin-right: 5px;
+}
+</style>    
+<link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
+@endsection
 
-    
-    <div class="container-fluid">
-    	<div class="page-header">
-            <div class="row align-items-end">
-                <div class="col-lg-8">
-                    <div class="page-header-title">
-                        <i class="ik ik-user-plus bg-blue"></i>
-                        <div class="d-inline">
-                            <h5>{{ __('Edit User')}}</h5>
-                            <span>{{ __('Create new user, assign roles & permissions')}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <nav class="breadcrumb-container" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="{{url('/')}}"><i class="ik ik-home"></i></a>
+    @section("wrapper")
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Users</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item">
-                                <a href="#">{{ __('User')}}</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <!-- clean unescaped data is to avoid potential XSS risk -->
-                                {{ clean($user->name, 'titles')}}
-                            </li>
-
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('Edit User')}}</li>
                         </ol>
                     </nav>
                 </div>
+                <div class="ms-auto">
+                    <div class="btn-group">
+                        <a href="{{ url('user/create') }}" class="btn btn-primary">{{ __('Create new user')}}</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <!--end breadcrumb-->
             <!-- start message area-->
             @include('include.message')
             <!-- end message area-->
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form class="forms-sample" method="POST" action="{{ url('user/update') }}" >
+            <div class="card">
+                <div class="card-body">
+                <form class="forms-sample" method="POST" action="{{ url('user/update') }}" >
                         @csrf
                             <input type="hidden" name="id" value="{{$user->id}}">
                             <div class="row">
@@ -53,7 +44,7 @@
 
                                     <div class="form-group">
                                         <label for="name">{{ __('Username')}}<span class="text-red">*</span></label>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ clean($user->name, 'titles')}}" required>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required>
                                         <div class="help-block with-errors"></div>
 
                                         @error('name')
@@ -64,7 +55,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">{{ __('Email')}}<span class="text-red">*</span></label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ clean($user->email, 'titles')}}" required>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required>
                                         <div class="help-block with-errors"></div>
 
                                         @error('email')
@@ -91,11 +82,7 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                
+  
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Assign role & view role permisions -->
@@ -109,7 +96,7 @@
                                             @foreach($user->getAllPermissions() as $key => $permission) 
                                             <span class="badge badge-dark m-1">
                                                 <!-- clean unescaped data is to avoid potential XSS risk -->
-                                                {{ clean($permission->name, 'titles')}}
+                                                {{ $permission->name }}
                                             </span>
                                             @endforeach
                                         </div>
@@ -124,15 +111,15 @@
                             </div>
                         
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- push external js -->
-    @push('script') 
-        <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
-        <!--get role wise permissiom ajax script-->
-        <script src="{{ asset('js/get-role.js') }}"></script>
-    @endpush
+    <!--end page wrapper -->
+    @endsection
+
+@section("script")
+<script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
+<!--get role wise permissiom ajax script-->
+<script src="{{ asset('js/get-role.js') }}"></script>
 @endsection
