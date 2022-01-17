@@ -76,7 +76,6 @@
 				</nav>
 			</div>
 </header>
-
 <!--sidebar wrapper -->
 <div class="nav-container">
 			<div class="mobile-topbar-header">
